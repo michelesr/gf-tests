@@ -92,13 +92,13 @@
     c.then(function() {
       test.assertTitle('GF - Gestione gas', 'Page reloaded');
       return;
-      this.echo('Checkin number of orders');
+      this.echo('Checking number of orders');
       c.waitForSelector('.odd');
       c.waitForSelector('.even');
     });
     c.then(function() {
-      this.echo('Testing that scheduled order are 3');
-      test.assertElementCount('.even, .odd', 3);
+      this.echo('Testing that scheduled orders are 3');
+      test.assertElementCount('.even, .odd', 3, 'Orders count match');
     });
     c.then(function() {
       this.echo('Capturing a screenshoot of the page on screenshoot.png');

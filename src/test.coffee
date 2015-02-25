@@ -73,12 +73,12 @@ c.test.begin 'Intergas Order test', 5, (test) ->
         this.wait 10000 ; return
     c.then ->
         test.assertTitle 'GF - Gestione gas', 'Page reloaded' ; return
-        this.echo 'Checkin number of orders'
+        this.echo 'Checking number of orders'
         c.waitForSelector('.odd')
         c.waitForSelector('.even') ; return
     c.then ->
-        this.echo 'Testing that scheduled order are 3'
-        test.assertElementCount '.even, .odd', 3 ; return
+        this.echo 'Testing that scheduled orders are 3'
+        test.assertElementCount '.even, .odd', 3, 'Orders count match'; return
     c.then ->
         this.echo 'Capturing a screenshoot of the page on screenshoot.png'
         this.capture 'screenshot.png'
