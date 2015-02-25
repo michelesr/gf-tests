@@ -16,8 +16,7 @@
     });
     c.then(function() {
       test.assertTitle('GF - Gestione des', 'Logged user page loaded');
-      return;
-      return this.echo('Switching to Dom user');
+      this.echo('Switching to Dom user');
     });
     c.thenEvaluate(function() {
       $('#user_to_simulate').val('3');

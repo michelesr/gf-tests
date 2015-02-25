@@ -13,8 +13,8 @@ c.test.begin 'Intergas Order test', 5, (test) ->
                     password: 'lJgistcZsVnQV2M'
                   }, true ; return
     c.then ->
-        test.assertTitle 'GF - Gestione des', 'Logged user page loaded' ; return
-        this.echo 'Switching to Dom user'
+        test.assertTitle 'GF - Gestione des', 'Logged user page loaded'
+        this.echo 'Switching to Dom user' ; return
     c.thenEvaluate ->
         $('#user_to_simulate').val '3'
         $('#user_to_simulate').change() ; return
