@@ -3,15 +3,20 @@
 # add an InterGAS scheduled order.
 
 c = casper
-c.test.begin 'Intergas Order test', 5, (test) ->
+c.test.begin 'Intergas Order test', 4, (test) ->
     c.start 'http://localhost:8000'
     c.then ->
         test.assertTitle 'GASISTA FELICE', 'Main page loaded'
         this.echo 'Starting authentication'
-        this.fill 'form', {
-                    username: 'admin',
-                    password: 'lJgistcZsVnQV2M'
-                  }, true ; return
+        auth =
+            username: 'admin'
+            password: 'lJgistcZsVnQV2M'
+        this.fill 'form', auth, true ; return
+    c.then ->
+        this.echo 'Waiting for logged user page'
+        c.waitFor ->
+            this.getTitle() == 'GF - Gestione des'
+        return
     c.then ->
         test.assertTitle 'GF - Gestione des', 'Logged user page loaded'
         this.echo 'Switching to Dom user' ; return
@@ -61,7 +66,6 @@ c.test.begin 'Intergas Order test', 5, (test) ->
             repeat_until_date: '24/05/2015'
             intergas: 'on'
             intergas_grd: '16'
-
         for k, v of obj
             this.echo "    #{k}: \"#{v}\""
         this.fill '#gassupplierorder_form', obj  , false ; return
@@ -72,7 +76,6 @@ c.test.begin 'Intergas Order test', 5, (test) ->
         this.echo 'Waiting...'
         this.wait 10000 ; return
     c.then ->
-        test.assertTitle 'GF - Gestione gas', 'Page reloaded' ; return
         this.echo 'Checking number of orders'
         c.waitForSelector('.odd')
         c.waitForSelector('.even') ; return

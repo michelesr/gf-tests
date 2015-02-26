@@ -4,15 +4,23 @@
 
   c = casper;
 
-  c.test.begin('Intergas Order test', 5, function(test) {
+  c.test.begin('Intergas Order test', 4, function(test) {
     c.start('http://localhost:8000');
     c.then(function() {
+      var auth;
       test.assertTitle('GASISTA FELICE', 'Main page loaded');
       this.echo('Starting authentication');
-      this.fill('form', {
+      auth = {
         username: 'admin',
         password: 'lJgistcZsVnQV2M'
-      }, true);
+      };
+      this.fill('form', auth, true);
+    });
+    c.then(function() {
+      this.echo('Waiting for logged user page');
+      c.waitFor(function() {
+        return this.getTitle() === 'GF - Gestione des';
+      });
     });
     c.then(function() {
       test.assertTitle('GF - Gestione des', 'Logged user page loaded');
@@ -90,8 +98,6 @@
       this.wait(10000);
     });
     c.then(function() {
-      test.assertTitle('GF - Gestione gas', 'Page reloaded');
-      return;
       this.echo('Checking number of orders');
       c.waitForSelector('.odd');
       c.waitForSelector('.even');
