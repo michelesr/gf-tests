@@ -25,4 +25,4 @@ Per eseguire i test son necessari i seguenti passi:
 
 - lanciare i tests::
 
-    casperjs test.js
+    casperjs test test.js
