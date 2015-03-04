@@ -80,8 +80,8 @@ c.test.begin 'Intergas Order test', 4, (test) ->
       intergas: 'on'
       intergas_grd: '2'
     for k, v of obj
-      @echo "    #{k}: \"#{v}\""
-    @fill '#gassupplierorder_form', obj  , false
+      @echo "  #{k}: '#{v}'"
+    @fill '#gassupplierorder_form', obj, false
 
   c.then ->
     @echo 'Clicking on submit button'
@@ -89,20 +89,22 @@ c.test.begin 'Intergas Order test', 4, (test) ->
 
   c.then ->
     @echo 'Waiting...'
-    @wait 10000
+    c.waitFor ->
+      c.evaluate ->
+        $('#loading-container').css('display') is "none"
 
   c.then ->
     @echo 'Checking number of orders'
-    c.waitForSelector('.odd')
-    c.waitForSelector('.even')
+    c.waitForSelector '.odd'
+    c.waitForSelector '.even'
 
   c.then ->
     @echo 'Testing that scheduled orders are 3'
     test.assertElementCount '.even, .odd', 3, 'Orders count match'
 
-  #c.then ->
-  #  @echo 'Capturing a screenshoot of the page on screenshoot.png'
-  #  @capture 'screenshot.png'
+  c.then ->
+    @echo 'Capturing a screenshot of the page on screenshot.png'
+    @capture 'screenshot.png'
   
   c.run ->
     test.done()
