@@ -15,8 +15,6 @@ c.test.begin 'Intergas Order test', 4, (test) ->
       username: 'admin'
       password: 'admin'
     @fill 'form', auth, true
-
-  c.then ->
     @echo 'Waiting for logged user page'
     c.waitFor ->
       @getTitle() == 'GF - Gestione des'
@@ -36,24 +34,18 @@ c.test.begin 'Intergas Order test', 4, (test) ->
   c.then ->
     @echo 'Clicking Gas01 link'
     @click 'a[href="#rest/gas/1"]'
-
-  c.then ->
     @echo 'Waiting for page Gas01'
     c.waitFor ->
       @getTitle() == 'GF - Gestione gas'
 
   c.then ->
     test.assertTitle 'GF - Gestione gas', 'Gas01 page'
-
-  c.then ->
     @echo 'Waiting for the orders tab selector'
     c.waitForSelector 'a[title="orders"]'
 
   c.then ->
     @echo 'Clickin on order tabs'
     @click 'a[title="orders"]'
-
-  c.then ->
     @echo 'Waiting for add order button'
     c.waitForSelector '.block_action'
 
@@ -82,12 +74,8 @@ c.test.begin 'Intergas Order test', 4, (test) ->
     for k, v of obj
       @echo "  #{k}: '#{v}'"
     @fill '#gassupplierorder_form', obj, false
-
-  c.then ->
     @echo 'Clicking on submit button'
     @click '.ui-button'
-
-  c.then ->
     @echo 'Waiting...'
     c.waitFor ->
       c.evaluate ->
@@ -101,8 +89,6 @@ c.test.begin 'Intergas Order test', 4, (test) ->
   c.then ->
     @echo 'Testing that scheduled orders are 3'
     test.assertElementCount '.even, .odd', 3, 'Orders count match'
-
-  c.then ->
     @echo 'Capturing a screenshot of the page on screenshot.png'
     @capture 'screenshot.png'
   
