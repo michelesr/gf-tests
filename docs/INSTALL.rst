@@ -4,7 +4,7 @@ Installation
 Using NPM
 -------------------
 
-Install ``casperjs`` and ``phantomjs`` with npm::
+Install *casperjs* with *npm* package manager::
 
     $ npm install casperjs
 
@@ -27,14 +27,14 @@ Import the db::
 
     $ ./reset_db.sh
 
-If the script doesn't work, try launching as root or postgres user, or refer to
+If the script doesn't work, try launching as *root* or *postgres* user, or refer to
 Gasista Felice guide for importing a db.
 
 Go to source directory::
 
     $ cd ../src/
 
-Open the ``settings.json`` file and set ``localhost`` as ``hostname``.
+Open the ``settings.json`` file and set ``localhost`` as *hostname*.
 
 In order to start the tests you need to start the development webserver, please
 refer to Gasista Felice installation guide.
@@ -56,10 +56,12 @@ Go to the source directory::
 
     $ cd src/
 
-The ``settings.json`` should be configured to the right hostname and port, just make
-sure to expose the webserver to the network interface when you start it::
+The ``settings.json`` should be configured to the right *hostname* and *port*, just make
+sure to expose the *webserver* to the network interface when you start it::
 
     $ manage.py runserver 0.0.0.0:8000
+
+
 
 Open a shell inside the docker container::
 
@@ -72,3 +74,7 @@ From inside the container::
 Launch the test::
 
     $ casperjs test test.coffee
+    
+If phantom can't connect to the webserver, you need to configure the right hostname on ``settings.json``.
+
+Useful links: https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
