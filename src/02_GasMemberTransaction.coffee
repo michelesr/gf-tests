@@ -11,7 +11,7 @@ c.decimalRound = (x) ->
   (Math.round (x * 100)) / 100
 
 c.getRandomImport = ->
-    c.decimalRound(Math.random() * 100)
+  c.decimalRound(Math.random() * 100)
 
 c.getBalance = ->
   c.evaluate ->
@@ -80,11 +80,13 @@ c.test.begin 'Transaction test', 8, (test) ->
 
   c.then ->
     expectedBalance = c.decimalRound(gasmember.balance - gasmember.detraction)
-    test.assertEqual c.getBalance(), expectedBalance, 'Member Balance is correct after detraction (asset)'
+    test.assertEqual c.getBalance(), expectedBalance,
+      'Member Balance is correct after detraction (asset)'
     gasmember.balance = c.getBalance()
     @echo "Balance = #{gasmember.balance}"
     gasmember.increment = c.getRandomImport()
-    @echo "Starting balance increment (liability) for an amount of #{gasmember.increment}"
+    @echo "Starting balance increment (liability)" +
+      "for an amount of #{gasmember.increment}"
     obj =
       amount: gasmember.increment
       target: 'LIABILITY'
@@ -108,7 +110,8 @@ c.test.begin 'Transaction test', 8, (test) ->
 
   c.then ->
     expectedBalance = c.decimalRound(gasmember.balance + gasmember.increment)
-    test.assertEqual c.getBalance(), expectedBalance, 'Member Balance is correct after increment (liability)'
+    test.assertEqual c.getBalance(), expectedBalance,
+      'Member Balance is correct after increment (liability)'
     gasmember.balance = c.getBalance()
     @echo "Gasmember Balance = #{gasmember.balance}"
     c.waitForSelector 'a[href="#rest/gas/1/"]'
@@ -149,7 +152,8 @@ c.test.begin 'Transaction test', 8, (test) ->
     gasmember.balance = c.getBalance()
     @echo "Balance = #{gasmember.balance}"
     gasmember.detraction = c.getRandomImport()
-    @echo "Starting detraction (expense) for an amount of #{gasmember.detraction}"
+    @echo "Starting detraction (expense) for an amount of" +
+      " #{gasmember.detraction}"
     obj =
       amount: gasmember.detraction
       target: 'EXPENSE'
@@ -180,7 +184,8 @@ c.test.begin 'Transaction test', 8, (test) ->
 
   c.then ->
     expectedBalance = c.decimalRound(gas.balance + gasmember.detraction)
-    test.assertEqual c.getBalance(), expectedBalance, 'Gas balance is correct after gasmember detraction (expense)'
+    test.assertEqual c.getBalance(), expectedBalance,
+      'Gas balance is correct after gasmember detraction (expense)'
     gas.balance = c.getBalance()
     @echo 'Coming back to gasmember page'
     @click 'a[href="#rest/gasmember/1"]'
@@ -198,11 +203,13 @@ c.test.begin 'Transaction test', 8, (test) ->
 
   c.then ->
     expectedBalance = c.decimalRound(gasmember.balance - gasmember.detraction)
-    test.assertEqual c.getBalance(), expectedBalance, 'Member Balance is correct after expense operation'
+    test.assertEqual c.getBalance(), expectedBalance,
+      'Member Balance is correct after expense operation'
     gasmember.balance = c.getBalance()
     @echo "Balance = #{gasmember.balance}"
     gasmember.increment = c.getRandomImport()
-    @echo "Starting balance increment (income) for an amount of #{gasmember.increment}"
+    @echo "Starting balance increment (income) for an amount of" +
+      " #{gasmember.increment}"
     obj =
       amount: gasmember.increment
       target: 'INCOME'
@@ -232,7 +239,8 @@ c.test.begin 'Transaction test', 8, (test) ->
 
   c.then ->
     expectedBalance = c.decimalRound(gas.balance - gasmember.increment)
-    test.assertEqual c.getBalance(), expectedBalance, 'Gas balance is correct after gasmember increment (income)'
+    test.assertEqual c.getBalance(), expectedBalance,
+      'Gas balance is correct after gasmember increment (income)'
     gas.balance = c.getBalance()
     @echo 'Coming back to gasmember page'
     @click 'a[href="#rest/gasmember/1"]'
@@ -250,11 +258,13 @@ c.test.begin 'Transaction test', 8, (test) ->
 
   c.then ->
     expectedBalance = c.decimalRound(gasmember.balance + gasmember.increment)
-    test.assertEqual c.getBalance(), expectedBalance, 'Member Balance is correct after income operation'
+    test.assertEqual c.getBalance(), expectedBalance,
+      'Member Balance is correct after income operation'
     gasmember.balance = c.getBalance()
     @echo "Balance = #{gasmember.balance}"
     gasmember.increment = c.getRandomImport()
-    @echo "Starting balance increment (equity) for an amount of #{gasmember.increment}"
+    @echo "Starting balance increment (equity) for an amount of" +
+      " #{gasmember.increment}"
     obj =
       amount: gasmember.increment
       target: 'EQUITY'
@@ -284,7 +294,8 @@ c.test.begin 'Transaction test', 8, (test) ->
 
   c.then ->
     expectedBalance = c.decimalRound(gas.balance - gasmember.increment)
-    test.assertEqual c.getBalance(), expectedBalance, 'Gas balance is correct after gasmember increment (equity)'
+    test.assertEqual c.getBalance(), expectedBalance,
+      'Gas balance is correct after gasmember increment (equity)'
     gas.balance = c.getBalance()
     @echo 'Coming back to gasmember page'
     @click 'a[href="#rest/gasmember/1"]'
@@ -302,7 +313,8 @@ c.test.begin 'Transaction test', 8, (test) ->
 
   c.then ->
     expectedBalance = c.decimalRound(gasmember.balance + gasmember.increment)
-    test.assertEqual c.getBalance(), expectedBalance, 'Member Balance is correct after equity operation'
+    test.assertEqual c.getBalance(), expectedBalance,
+      'Member Balance is correct after equity operation'
 
   c.run ->
     test.done()
