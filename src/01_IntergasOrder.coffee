@@ -4,6 +4,7 @@
 fs = require 'fs'
 settings = JSON.parse fs.read 'settings.json'
 c = casper
+c.timeout = 20000
 
 c.test.begin 'Intergas Order test', 4, (test) ->
   c.start "http://#{settings.hostname}:#{settings.port}/"
@@ -91,7 +92,6 @@ c.test.begin 'Intergas Order test', 4, (test) ->
     test.assertElementCount '.even, .odd', 3, 'Orders count match'
     @echo 'Capturing a screenshot of the page on screenshot.png'
     @capture 'screenshot.png'
-  
+
   c.run ->
     test.done()
-

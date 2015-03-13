@@ -39,9 +39,9 @@ Open the ``settings.json`` file and set ``localhost`` as *hostname*.
 In order to start the tests you need to start the development webserver, please
 refer to Gasista Felice installation guide.
 
-To launch the test::
+To launch the tests::
 
-    $ casperjs test test.coffee
+    $ casperjs test *.coffee
 
 Using a docker image
 --------------------
@@ -71,9 +71,9 @@ From inside the container::
 
     $ cd /mnt/test
 
-Launch the test::
+Launch the tests::
 
-    $ casperjs test test.coffee
+    $ casperjs test *.coffee
     
 If phantom can't connect to the webserver, you need to configure the right hostname on ``settings.json``.
 
